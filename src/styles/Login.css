@@ -19,7 +19,7 @@
 }
 
 .Header-image{
-    width: 350px;
+    width: 250px;
 }
 
 .Header-nav{
@@ -74,12 +74,15 @@
     color: red;
 }
 
-/* logo tamaño 
+/* 
+logo tamaño 
+logo miniatura
 variables 
 tipografias
 linea accede a tu cuenta
 Transiciones
 Responsive
 Pasar todo a rem
-Componentes, useContext */
+Componentes, useContext 
+*/
 
