@@ -8,7 +8,6 @@ function App() {
   return (
     <BrowserRouter>
       <>
-        <h1>Zara</h1>
 
         {/* Enrutamiento básico */}
         <Routes>
