@@ -46,6 +46,9 @@ export const Login = () => {
                 if (data) {
                     localStorage.setItem('usuarios', JSON.stringify(data))
                     navigate('/gestor')
+                } else {
+                    localStorage.setItem('usuarios', JSON.stringify(data))
+                    navigate('/')
                 }
             })
             .catch(error => console.log(error))
