@@ -81,7 +81,7 @@ const Header = () => {
             <section className='Header-section'>
                 <h1 className='Header-h1'>
                     <a href="https://www.zara.com/es/" className='Header-logo'>
-                        <img src="/logo-zara.png" alt="Zara" className='Header-image'/>
+                        <img src="/logo.svg" alt="Zara" className='Header-image'/>
                     </a>
                 </h1>
                 <nav className='Header-nav'>

@@ -1,88 +1,180 @@
-.Header{
+.Header {
+    /* movil */
+        display: block;
+        max-width: 100%;
+        width: 100%;
+        padding: 0.625rem;
+        padding-top: 1.875rem;
+        margin-bottom: 10%;
+
+    /* tablet */
+        @media screen and (min-width: 640px) {
+            padding: 1.25rem;
+            margin-bottom: 5%;
+        }
+
+    /* desktop */
+        @media screen and (min-width: 1440px) {
+            padding: 1.25rem;
+            margin-bottom: 5%;
+        }
+
+}
+
+.Header-section {
+    /* movil */
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 0 10%;
+
+    /* tablet */
+        @media screen and (min-width: 640px) {
+            align-items: start;
+            flex-direction: row;
+            gap: 0;
+        }
+
+    /* desktop */
+        @media screen and (min-width: 1440px) {
+            align-items: start;
+            flex-direction: row;
+            gap: 0;
+        }
+}
+
+.Header-image {
     width: 100%;
-    max-width: 100%;
-    padding: 1.25rem;
-    /* padding-left: 10%; */
-    /* position: fixed; */
-    background-color: red;
-    display: block;
-    margin-bottom: 5%;
 }
 
-.Header-section{
-    display: flex;
-    align-items: start;
-    flex-direction: row;
-    justify-content: space-between;
-    background-color: blue;
-    padding: 0 10%;
+.Header-nav {
+    /* movil */
+        padding: 0.4375rem 0.4375rem 0.4375rem 25%;
+        margin-top: 0.625rem;
+        font-size: 0.625rem;
+        border: 0.0625rem solid var(--primary-color);
+        background-color: var(--secundary-color);
+
+    /* tablet */
+        @media screen and (min-width: 640px) {
+            font-size: 0.75rem;
+            padding: 0.5rem 0.5rem 0.5rem 25%;
+        }
+
+    /* desktop */
+        @media screen and (min-width: 1440px) {
+            font-size: 0.9375rem;
+            padding: 0.625rem 0.625rem 0.625rem 25%;
+        }
 }
 
-.Header-image{
-    width: 300px;
+.Form {
+    /* movil */
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        padding: 0 10%;
+        width: 100%;
+
+    /* tablet */
+        @media screen and (min-width: 640px) {
+            width: 60%;
+        }
+
+    /* desktop */
+        @media screen and (min-width: 1440px) {
+            width: 50%;
+        }
 }
 
-.Header-nav{
-    margin-top: 10px;
-    padding: 0.625rem 0.625rem 0.625rem 35%;
-    background-color: green;
-    border: 1px solid yellow;
+.Form-h2 {
+    /* movil */
+        margin-bottom: 1rem;
+        font-size: 1rem;
+        font-weight: var(--font-regular);
+
+    /* tablet */
+        @media screen and (min-width: 640px) {
+            margin-bottom: 1.25rem;
+        }
+
+    /* desktop */
+        @media screen and (min-width: 1440px) {
+            margin-bottom: 1.25rem;
+            font-size: 1.25rem;
+        }
 }
 
-.Form{
-    width: 50%;
-    padding: 0 10%;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
+.Form-container {
+    /* movil */
+        display: flex;
+        flex-direction: column;
+        gap: 4rem;
+
+    /* tablet */
+        @media screen and (min-width: 640px) {
+            gap: 5rem;
+        }
+
+    /* desktop */
+        @media screen and (min-width: 1440px) {
+            gap: 5rem;
+        }
 }
 
-.Form-h2{
-    margin-bottom: 20px;
+.Form-dates {
+    /* movil */
+        display: flex;
+        flex-direction: column;
+        gap: 3rem;
 }
 
-.Form-container{
-    display: flex;
-    flex-direction: column;
-    gap: 5rem;
+.Form-line {
+    /* movil */
+        height: 1.5rem;
+        border-bottom: 0.0625rem solid var(--primary-color);
 }
 
-.Form-dates{
-    display: flex;
-    flex-direction: column;
-    gap: 3rem;    
+.Form-info {
+    /* movil */
+        font-size: 0.625rem;
+        border: 0;
+        outline: none;
+
+    /* tablet */
+        @media screen and (min-width: 640px) {
+            font-size: 0.75rem;
+        }
+
+    /* desktop */
+        @media screen and (min-width: 1440px) {
+            font-size: 0.9375rem;
+        }
 }
 
-.Form-line{
-    height: 20px;
-    border-bottom: 1px solid green;
-    /* margin-bottom: 20px; */
+.Form-access {
+    /* movil */
+        padding: 1rem;
+        font-size: 0.6875rem;
+        background-color: var(--secundary-color);
+
+    /* tablet */
+        @media screen and (min-width: 640px) {
+            padding: 0.625rem;
+            font-size: 0.8125rem;
+        }
+
+    /* desktop */
+        @media screen and (min-width: 1440px) {
+            padding: 1rem;
+            font-size: 1rem;
+        }
 }
 
-.Form-info{
-    border: 0;
-    /* padding-bottom: 5px; */
-    /* text-decoration: underline 1px blue; */
+.Form-access:hover {
+    /* movil */
+        color: var(--hover-color);
+
 }
-
-.Form-access{
-    padding: 1rem;
-    background-color: white;
-}
-
-.Form-access:hover{
-    color: red;
-}
-
-/* 
-logo tamaño 
-logo miniatura
-variables 
-tipografias
-linea accede a tu cuenta
-Transiciones
-Responsive
-Pasar todo a rem
-Componentes, useContext 
-*/
-
