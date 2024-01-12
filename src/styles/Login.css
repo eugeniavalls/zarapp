@@ -159,6 +159,7 @@
         padding: 1rem;
         font-size: 0.6875rem;
         background-color: var(--secundary-color);
+        border: 1px solid var(--primary-color);
 
     /* tablet */
         @media screen and (min-width: 640px) {
