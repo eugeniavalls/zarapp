@@ -53,7 +53,7 @@ export const Gestor = () => {
             signal: controller.signal
         }
 
-        fetch(`${VITE_URL_API}/gestor`, options)
+        fetch(`${VITE_URL_API}gestor`, options)
             .then(res => res.json())
             .then(data => {
                 console.clear()
