@@ -1,0 +1,38 @@
+.Slider {
+    z-index: -20;
+    position: relative;
+    /* overflow: hidden; */
+}
+
+.Slider-container {
+    width: 100%;
+    background-color: red;
+    transition: all .5s ease;
+/* 
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); */
+}
+
+.Slider-img{
+    min-height: 8rem; 
+}
+
+.Slider-next{
+    width: 4rem;
+    height: 4rem;
+    /* background-color: blue; */
+    position: absolute;
+    top: calc(50% - 2rem);
+    right: 0;
+}
+ 
+.Slider-prev{
+    width: 4rem;
+    height: 4rem;
+    /* background-color: blue; */
+    position: absolute;
+    top: calc(50% - 2rem);
+    left: 0;
+}
+
+

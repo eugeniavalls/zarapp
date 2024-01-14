@@ -1,7 +1,11 @@
 import { useNavigate } from 'react-router-dom'
-import { useEffect, useRef, useState } from "react"
+import { createContext, useContext, useEffect, useRef, useState } from "react"
 import '/src/styles/Gestor.css'
 import '/src/styles/Slider.css'
+import '/src/styles/Header.css'
+import '/src/styles/Rebajas.css'
+
+const HeaderContext = createContext()
 
 export const Gestor = () => {
     
@@ -30,7 +34,11 @@ export const Gestor = () => {
             setActive(sliders.length - 1)
         }
     }
-    
+
+    const rebajasHandler = () => navigate('/rebajas')
+    const logoHandler = () => navigate('/gestor')
+    const wishlistHandler = () => navigate('/wishlist')
+
     useEffect(() => {
         // Si no se ha iniciado la sesión, redirige a login
         if (!localStorage.getItem('usuarios')) {
@@ -68,31 +76,74 @@ export const Gestor = () => {
         
     }, [])
 
-    
 
 
     return (
-        <>
+    
+        <HeaderContext.Provider value={{rebajasHandler, logoHandler, wishlistHandler}}>
             <Header />
-            
-        </>
+            <Rebajas/>
+            <SliderProvisional/>
+
+        </HeaderContext.Provider>
     )
 }
 
 const Header = () => {
+    const {logoHandler, wishlistHandler} = useContext(HeaderContext)
+
     return (
         <header className='Header Header-gestor'>
             <section className='Header-section'>
                 <h1 className='Header-h1'>
-                    <a href="https://www.zara.com/es/" className='Header-logo'>
-                        <img src="/logo-yellow.svg" alt="Zara" className='Header-image' />
-                    </a>
+        
+                        <img src="/logo-yellow.svg" alt="Zara" className='Header-image' onClick={logoHandler} />
+                    
                 </h1>
-                <nav className='Header-nav'>
+                <nav className='Header-nav Header-nav-wishlist' onClick={wishlistHandler}>
                     <ul className='Header-ul Header-wishlist'> WISHLIST </ul>
                 </nav>
             </section>
         </header>
+    )
+}
+
+const Rebajas = () => {
+    const {rebajasHandler} = useContext(HeaderContext)
+    return(
+        
+        <button className='Rebajas-button Form-access' onClick={rebajasHandler}>
+            REBAJAS 
+        </button>
+        
+    )
+}
+
+const SliderProvisional = () => {
+    return (
+        <main className='Main'>
+                {/* absolute */}
+                <div className='Slider'>
+                    {/* relative */}
+                    <div className='Slider-container' 
+                        // style={{ 
+                        //     width : `${100 * sliders.length}`, 
+                        //     gridTemplateColumns : `repeat ( ${100 / sliders.length}, 1fr)`,
+                        //     transform : `translateX(-${ (100/sliders.length) * active}%)`
+                        // }}
+                    >
+                        <img src="/home.jpg" alt="Imagen 1" className='Slider-img'/>
+                        <img src="/home2.jpg" alt="Imagen 2" className='Slider-img'/>
+                        <img src="/home3.jpg" alt="Imagen 3" className='Slider-img'/>
+                        <img src="/home4.jpg" alt="Imagen 4" className='Slider-img'/>
+                        <img src="/home5.jpg" alt="Imagen 5" className='Slider-img'/>
+                        
+                    </div>
+                </div>
+
+                <button className='Slider-next' ><img src="/angle-right-solid.svg" alt="Angle Next"/></button>
+                <button className='Slider-prev' ><img src="/angle-left-solid.svg" alt="Angle Prev" /></button>
+            </main>
     )
 }
 

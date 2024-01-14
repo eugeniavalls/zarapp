@@ -1,0 +1,10 @@
+.Rebajas-button{
+    padding: 8px 16px;
+    position: absolute;
+    top: 35%;
+    margin: 0 11%;
+    border: 1px solid var(--primary-color);
+    font-size: 13px;
+    background-color: var(--terciary-color);
+    /* z-index: 210; */
+}
