@@ -79,9 +79,7 @@ const Articulos = () => {
     const {prendas} = useContext(PrendasContext)
     return(
         <main className='Main'>
-                {/* absolute */}
                 <div className='Prendas'>
-                    {/* relative */}
                     <div className='Prendas-container'>
                         {prendas.map((eachPrenda) => (
                             <Prenda

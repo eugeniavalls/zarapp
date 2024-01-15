@@ -43,6 +43,9 @@ export const Gestor = () => {
         // Si no se ha iniciado la sesión, redirige a login
         if (!localStorage.getItem('usuarios')) {
             navigate('/')
+        } else{
+            //Si los datos de inicio de sesión existen entonces navega al gestor
+            navigate('/gestor')
         }
 
         // let nuevo = {
@@ -61,15 +64,12 @@ export const Gestor = () => {
             signal: controller.signal
         }
 
-        fetch(`${VITE_URL_API}gestor`, options)
+        fetch(`${VITE_URL_API}/gestor`, options)
             .then(res => res.json())
             .then(data => {
                 console.clear()
-                // console.log(data)
-                // const filtredData = JSON.parse(JSON.stringify(data))
-                setSlider(data)
-
-                
+                console.log(data)
+                setSlider(data) 
             })
             .catch(error => console.log(error))
             .finally(() => controller.abort())
@@ -80,10 +80,11 @@ export const Gestor = () => {
 
     return (
     
-        <HeaderContext.Provider value={{rebajasHandler, logoHandler, wishlistHandler}}>
+        <HeaderContext.Provider value={{rebajasHandler, logoHandler, wishlistHandler, sliders, active, prevHandler, nextHandler}}>
             <Header />
             <Rebajas/>
-            <SliderProvisional/>
+            {/* <SliderProvisional/> */}
+            <Slider/>
 
         </HeaderContext.Provider>
     )
@@ -119,40 +120,37 @@ const Rebajas = () => {
     )
 }
 
-const SliderProvisional = () => {
-    return (
-        <main className='Main'>
-                {/* absolute */}
-                <div className='Slider'>
-                    {/* relative */}
-                    <div className='Slider-container' 
-                        // style={{ 
-                        //     width : `${100 * sliders.length}`, 
-                        //     gridTemplateColumns : `repeat ( ${100 / sliders.length}, 1fr)`,
-                        //     transform : `translateX(-${ (100/sliders.length) * active}%)`
-                        // }}
-                    >
-                        <img src="/home.jpg" alt="Imagen 1" className='Slider-img'/>
-                        <img src="/home2.jpg" alt="Imagen 2" className='Slider-img'/>
-                        <img src="/home3.jpg" alt="Imagen 3" className='Slider-img'/>
-                        <img src="/home4.jpg" alt="Imagen 4" className='Slider-img'/>
-                        <img src="/home5.jpg" alt="Imagen 5" className='Slider-img'/>
+// const SliderProvisional = () => {
+//     return (
+//         <main className='Main'>
+//                 <div className='Slider'>
+//                     <div className='Slider-container' 
+//                         // style={{ 
+//                         //     width : `${100 * sliders.length}`, 
+//                         //     gridTemplateColumns : `repeat ( ${100 / sliders.length}, 1fr)`,
+//                         //     transform : `translateX(-${ (100/sliders.length) * active}%)`
+//                         // }}
+//                     >
+//                         <img src="/home.jpg" alt="Imagen 1" className='Slider-img'/>
+//                         <img src="/home2.jpg" alt="Imagen 2" className='Slider-img'/>
+//                         <img src="/home3.jpg" alt="Imagen 3" className='Slider-img'/>
+//                         <img src="/home4.jpg" alt="Imagen 4" className='Slider-img'/>
+//                         <img src="/home5.jpg" alt="Imagen 5" className='Slider-img'/>
                         
-                    </div>
-                </div>
+//                     </div>
+//                 </div>
 
-                <button className='Slider-next' ><img src="/angle-right-solid.svg" alt="Angle Next"/></button>
-                <button className='Slider-prev' ><img src="/angle-left-solid.svg" alt="Angle Prev" /></button>
-            </main>
-    )
-}
+//                 <button className='Slider-next' ><img src="/angle-right-solid.svg" alt="Angle Next"/></button>
+//                 <button className='Slider-prev' ><img src="/angle-left-solid.svg" alt="Angle Prev" /></button>
+//             </main>
+//     )
+// }
 
 const Slider = () => {
+    const {sliders, active, nextHandler, prevHandler} = useContext(HeaderContext)
     return (
         <main className='Main'>
-                {/* absolute */}
                 <div className='Slider'>
-                    {/* relative */}
                     <div className='Slider-container' 
                         style={{ 
                             width : `${100 * sliders.length}`, 
@@ -160,13 +158,6 @@ const Slider = () => {
                             transform : `translateX(-${ (100/sliders.length) * active}%)`
                         }}
                     >
-                        {/* {sliders.map ( (eachSlider) => 
-                            <img 
-                                src = {eachSlider.src}
-                                alt = {eachSlider.alt}
-                                className='Slider-img'
-                            />
-                        )} */}
 
                         {sliders.length > 0 && 
                             sliders.map((eachSlider, index) => (
@@ -183,21 +174,6 @@ const Slider = () => {
 
                 <button className='Slider-next' onClick={nextHandler}>Next</button>
                 <button className='Slider-prev' onClick={prevHandler}>Prev</button>
-
-                <ul className='Slider-points'>
-                    {/* {sliders.map ( (eachSlider, index) => 
-                        <li key = {eachSlider.id} className='Slider-point'>
-                        <button className={`Slider-btn ${active === index ? 'isSelected' : ''}`}></button>
-                    </li>
-                    )} */}
-                    {sliders.length > 0 && 
-                        sliders.map((eachSlider, index) => (
-                            <li key={index} className='Slider-point'>
-                                <button className={`Slider-btn ${active === index ? 'isSelected' : ''}`}></button>
-                            </li>
-                        ))
-                    }
-                </ul>
             </main>
     )
 }

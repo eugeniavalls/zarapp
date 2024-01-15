@@ -11,46 +11,51 @@ export const Login = () => {
     const nombre = useRef('')
     const pass = useRef('')
 
-    //Si ya he iniciado sesión me redirige automaticamente al gestor
+    // Si ya he iniciado sesión me redirige automaticamente al gestor
     useEffect(() => {
         if (localStorage.getItem('usuarios')) {
             navigate('/gestor')
         }
     })
 
-    const formHandler = async (e) => {
+    const formHandler =  (e) => {
         e.preventDefault()
 
         let nuevo = {
             nombre: nombre.current.value,
             pass: pass.current.value
         }
+        console.log(nuevo)
 
-        let controller = new AbortController()
+        if(nuevo.nombre && nuevo.pass){
 
-        //Cambiando siempre a stringify
-        let options = {
-            method: 'post',
-            body: JSON.stringify(nuevo),
-            headers: {
-                "Content-type": "application/json"
-            },
-            signal: controller.signal
+            let controller = new AbortController()
+    
+            //Cambiando siempre a stringify
+            let options = {
+                method: 'post',
+                body: JSON.stringify(nuevo),
+                headers: {
+                    "Content-type": "application/json"
+                },
+                signal: controller.signal
+            }
+    
+             fetch(VITE_URL_API, options)
+                .then(res => res.json())
+                .then(data => {
+                    // console.clear()
+                    console.log(data)
+                    //Si los datos de inicio de sesión existen entonces navega al gestor
+                    if (data) {
+                        localStorage.setItem('usuarios', JSON.stringify(data))
+                        navigate('/gestor')
+                    } 
+                })
+                .catch(error => console.log(error))
+                .finally(() => controller.abort())
         }
 
-        await fetch(VITE_URL_API, options)
-            .then(res => res.json())
-            .then(data => {
-                console.clear()
-                console.log(data)
-                //Si los datos de inicio de sesión existen entonces navega al gestor
-                if (data) {
-                    localStorage.setItem('usuarios', JSON.stringify(data))
-                    navigate('/gestor')
-                } 
-            })
-            .catch(error => console.log(error))
-            .finally(() => controller.abort)
     }
 
     return (
