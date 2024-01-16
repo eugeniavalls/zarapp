@@ -1,15 +1,37 @@
-.Rebajas-button{
+.Rebajas-button {
+    /* movil */
     padding: 8px 16px;
-    position: absolute;
-    top: 27%;
-    margin: 0 11%;
+    position: fixed;
+    top: 30%;
+    margin: 0;
+    left: 43%;
     border: 1px solid var(--primary-color);
-    font-size: 13px;
+    font-size: 10px;
     background-color: var(--terciary-color);
     /* z-index: 210; */
-    transition: all 0.2s linear ;
+    transition: all 0.2s linear;
+
+
+    /* tablet */
+    @media screen and (min-width: 640px) { 
+        top: 27%;
+        margin: 0 11%;
+        left: 0;
+        font-size: 12px;
+        /* z-index: 210; */
+    }
+
+    /* desktop */
+    @media screen and (min-width: 1440px) {
+        top: 27%;
+        margin: 0 11%;
+        left: 0;
+        border: 1px solid var(--primary-color);
+        font-size: 15px;
+        /* z-index: 210; */
+    }
 }
 
-.Rebajas-button:hover{
+.Rebajas-button:hover {
     color: var(--hover-color);
 }
