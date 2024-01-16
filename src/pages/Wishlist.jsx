@@ -16,8 +16,7 @@ export const Wishlist = () => {
     return (
         <PrendasContext.Provider value={{ logoHandler }}>
             <Header />
-            <Editar/>
-            <Articulos/>
+            <Articulos />
 
         </PrendasContext.Provider>
     )
@@ -42,24 +41,13 @@ const Header = () => {
     )
 }
 
-const Editar = () => {
-    // const {rebajasHandler} = useContext(HeaderContext)
-    return(
-        
-        <button className='Editar-button'>
-            EDITAR 
-        </button>
-        
-    )
-}
-
 const Articulos = () => {
-    const {  } = useContext(PrendasContext)
+    const { } = useContext(PrendasContext)
     return (
         <main className='Main'>
             <div className='Prendas'>
                 <div className='Prendas-container'>
-                    <Prenda/>
+                    <Prenda />
 
 
                 </div>
@@ -73,6 +61,10 @@ const Prenda = () => {
     return (
 
         <div className='Prenda Prenda-wishlist'>
+            <div className='Prenda-icons'>
+                <img src="/icon-update.svg" alt="Wishlist" className='Prenda-icon Prenda-icon-wishlist' />
+                <img src="/icon-delete.svg" alt="Wishlist" className='Prenda-icon Prenda-icon-wishlist' />
+            </div>
             <img src="/Prendas/prenda1.jpeg" alt="Prenda 1" className='Prenda-img' />
             <div className='Prenda-info'>
                 <div className='Prenda-text'>
