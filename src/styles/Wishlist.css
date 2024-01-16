@@ -1,86 +1,84 @@
-.Prendas {
+/* .Prendas { */
     /* z-index: -20;
     position: absolute; */
     /* overflow: hidden; */
-    padding: 0 10%;
-}
+    /* padding: 0 10%;
+} */
 
-.Prendas-container {
-    width: 100%;
+/* .Prendas-container {
+    width: 100%; */
     /* background-color: red; */
-    transition: all .5s ease;
+    /* transition: all .5s ease;
 
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 1rem;
 
-}
+} */
 
-.Prenda{
+/* .Prenda{
     display: flex;
     flex-direction: column;
     gap: 1rem;
     margin-bottom: 20%;
-}
+} */
 
-.Prenda-img{
-    /* min-height: 8rem;  */
-}
+/* .Prenda-img{
+    min-height: 8rem; 
+} */
 
-.Prenda-info{
+/* .Prenda-info{
 
-}
+} */
 
-.Prenda-text{
+/* .Prenda-text{
     display: flex;
     flex-direction: row;
     align-items: start;
     justify-content: space-between;
 
-}
+} */
 
-.Prenda-name{
+/* .Prenda-name{
     font-size: 13px;
 
-}
+} */
 
-.Prenda-icon{
+/* .Prenda-icon{
     width: 18px;
+} */
 
-}
-
-.Prenda-price{
+/* .Prenda-price{
     display: flex;
     flex-direction: row;
     font-size: 11px;
     align-items: center;
     justify-content: start;
     gap: 1rem;
-}
+} */
 
-.Prenda-price-old{
+/* .Prenda-price-old{
     color: var(--color-opacity);
     text-decoration: line-through;
-}
+} */
 
-.Prenda-price-last{
+/* .Prenda-price-last{
     text-decoration: line-through;
+} */
 
-}
-
-.Prenda-price-now{
+/* .Prenda-price-now{
     display: flex;
     flex-direction: row;
     gap: 0.5rem;
     padding: 0 4px;
     background-color: var(--terciary-color);
     font-weight: var(--font-medium);
-}
+} */
 
-.Editar-button{
+/* .Editar-button{ */
 
 /* movil */
-    padding: 1rem;
+    /* padding: 1rem;
     font-size: 0.6875rem;
     background-color: var(--secundary-color);
     border: 1px solid var(--primary-color);
@@ -92,24 +90,24 @@
     font-weight: var(--font-regular);
     
 
-    transition: all 0.2s linear ;
+    transition: all 0.2s linear ; */
 
 /* tablet */
-    @media screen and (min-width: 640px) {
+    /* @media screen and (min-width: 640px) {
         padding: 0.625rem;
         font-size: 0.8125rem;
-    }
+    } */
 
 /* desktop */
-    @media screen and (min-width: 1440px) {
+    /* @media screen and (min-width: 1440px) {
         padding: 8px 16px;
         position: absolute;
         border: 1px solid var(--primary-color);
         font-size: 13px;
     }
-}
+} */
 
-.Editar-button:hover{ 
+/* .Editar-button:hover{  */
     /* movil */
-        color: var(--hover-color); 
-}
+        /* color: var(--hover-color); 
+} */
