@@ -113,7 +113,7 @@ const Rebajas = () => {
     const {rebajasHandler} = useContext(HeaderContext)
     return(
         
-        <button className='Rebajas-button Form-access' onClick={rebajasHandler}>
+        <button className='Rebajas-button' onClick={rebajasHandler}>
             REBAJAS 
         </button>
         
@@ -153,9 +153,8 @@ const Slider = () => {
                 <div className='Slider'>
                     <div className='Slider-container' 
                         style={{ 
-                            width : `${100 * sliders.length}`, 
-                            gridTemplateColumns : `repeat ( ${100 / sliders.length}, 1fr)`,
-                            transform : `translateX(-${ (100/sliders.length) * active}%)`
+                            width : `100%`,
+                            transform : `translateY(-${ (100/sliders.length) * active}%)`
                         }}
                     >
 

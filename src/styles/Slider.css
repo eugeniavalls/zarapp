@@ -6,7 +6,7 @@
 
 .Slider-container {
     width: 100%;
-    background-color: red;
+    /* background-color: red; */
     transition: all .5s ease;
 /* 
     display: grid;
