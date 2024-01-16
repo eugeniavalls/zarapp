@@ -36,7 +36,7 @@ export const Prendas = () => {
             signal: controller.signal
         }
 
-        fetch(`${VITE_URL_API}/rebajas`, options)
+        fetch(`${VITE_URL_API}rebajas`, options)
             .then(res => res.json())
             .then(data => {
                 console.clear()
