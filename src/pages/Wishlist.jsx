@@ -1,29 +1,59 @@
 import { useNavigate } from 'react-router-dom'
-import { createContext, useContext, useEffect, useRef } from "react"
+import { createContext, useContext, useEffect, useRef, useState } from "react"
 import '/src/styles/Gestor.css'
 import '/src/styles/Slider.css'
 import '/src/styles/Header.css'
 import '/src/styles/Rebajas.css'
 import '/src/styles/Wishlist.css'
 
-const PrendasContext = createContext()
+const WishlistContext = createContext()
 
 export const Wishlist = () => {
+    const { VITE_URL_API } = import.meta.env
+    
     const navigate = useNavigate()
 
     const logoHandler = () => navigate('/gestor')
+    const wishlistHandler = () => navigate('/wishlist')
+
+    //UseState para buscar los elementos del array de prendas
+    const [wishlist, setWishlist] = useState([])
+
+    useEffect(() => {
+
+        let controller = new AbortController()
+
+        let options = {
+            method: 'get',
+            headers: {
+                "Content-type": "application/json"
+            },
+            signal: controller.signal
+        }
+
+        fetch(`${VITE_URL_API}wishlist`, options)
+            .then(res => res.json())
+            .then(data => {
+                console.clear()
+                console.log("Datos de la API", data)
+                setWishlist(data)
+            })
+            .catch(error => console.log(error))
+            .finally(() => controller.abort())
+        
+    }, [])
 
     return (
-        <PrendasContext.Provider value={{ logoHandler }}>
+        <WishlistContext.Provider value={{ logoHandler, wishlistHandler, wishlist }}>
             <Header />
             <Articulos />
 
-        </PrendasContext.Provider>
+        </WishlistContext.Provider>
     )
 }
 
 const Header = () => {
-    const { logoHandler } = useContext(PrendasContext)
+    const { logoHandler, wishlistHandler } = useContext(WishlistContext)
 
     return (
         <header className='Header Header-wishlistgeneral'>
@@ -33,7 +63,7 @@ const Header = () => {
                     <img src="/logo.svg" alt="Zara" className='Header-image' onClick={logoHandler} />
 
                 </h1>
-                <nav className='Header-nav Header-nav-wishlist'>
+                <nav className='Header-nav Header-nav-wishlist' onClick={wishlistHandler}>
                     <ul className='Header-ul Header-wishlist'> WISHLIST </ul>
                 </nav>
             </section>
@@ -42,12 +72,17 @@ const Header = () => {
 }
 
 const Articulos = () => {
-    const { } = useContext(PrendasContext)
+    const { wishlist} = useContext(WishlistContext)
     return (
         <main className='Main'>
             <div className='Prendas'>
                 <div className='Prendas-container'>
-                    <Prenda />
+                    {wishlist.map((eachPrenda) => (
+                            <Prenda
+                                key={eachPrenda.id}
+                                {...eachPrenda}
+                            />
+                        ))}
 
 
                 </div>
@@ -56,8 +91,8 @@ const Articulos = () => {
     )
 }
 
-const Prenda = () => {
-    // const { src, alt, prendaName, prendaPriceActual, prendaPriceDisccount, prendaPriceLast, prendaPriceOld } = props
+const Prenda = (props) => {
+    const { src, alt, prendaName, prendaPriceActual, prendaPriceDisccount, prendaPriceLast, prendaPriceOld } = props
     return (
 
         <div className='Prenda Prenda-wishlist'>
@@ -65,17 +100,17 @@ const Prenda = () => {
                 <img src="/icon-update.svg" alt="Wishlist" className='Prenda-icon Prenda-icon-wishlist' />
                 <img src="/icon-delete.svg" alt="Wishlist" className='Prenda-icon Prenda-icon-wishlist' />
             </div>
-            <img src="/Prendas/prenda1.jpeg" alt="Prenda 1" className='Prenda-img' />
+            <img src={src} alt={alt} className='Prenda-img' />
             <div className='Prenda-info'>
                 <div className='Prenda-text'>
-                    <p className='Prenda-name'>ANORAK ACOLCHADO</p>
+                    <p className='Prenda-name'>{prendaName}</p>
                 </div>
                 <div className='Prenda-price'>
-                    <p className='Prenda-price-old'>59,95 EUR</p>
-                    <p className='Prenda-price-last'>39,99 EUR</p>
+                    <p className='Prenda-price-old'>{prendaPriceOld}</p>
+                    <p className='Prenda-price-last'>{prendaPriceLast}</p>
                     <div className='Prenda-price-now'>
-                        <p className='Prenda-price-disccount'>-66%</p>
-                        <p className='Prenda-price-actual'>19,99 EUR</p>
+                        <p className='Prenda-price-disccount'>{prendaPriceDisccount}</p>
+                        <p className='Prenda-price-actual'>{prendaPriceActual}</p>
                     </div>
                 </div>
             </div>
