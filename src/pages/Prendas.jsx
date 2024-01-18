@@ -5,6 +5,7 @@ import '/src/styles/Slider.css'
 import '/src/styles/Header.css'
 import '/src/styles/Rebajas.css'
 import '/src/styles/Prendas.css'
+import '/src/styles/PopUp.css'
 
 const PrendasContext = createContext()
 
@@ -18,7 +19,12 @@ export const Prendas = () => {
 
     //UseState para buscar los elementos del array de prendas
     const [prendas, setPrendas] = useState([])
+    //UseState para almacenar la Wishlist
     const [wishlist, setWishlist] = useState([])
+
+    //Pop up wishlist
+    const [wishlistPopUp, setWishlistPopUp] = useState(false)
+    const botonWishlistPopUp = () => setWishlistPopUp(!wishlistPopUp)
 
     const agregarWishlist = async (producto) => {
 
@@ -34,7 +40,7 @@ export const Prendas = () => {
 
         console.log(nuevo)
 
-        setWishlist([...wishlist, nuevo])
+        setWishlist([nuevo])
 
         let controller = new AbortController()
 
@@ -56,7 +62,7 @@ export const Prendas = () => {
             })
             .catch(error => console.log(error))
             .finally(() => controller.abort())
-        
+ 
     }
 
     useEffect(() => {
@@ -85,9 +91,20 @@ export const Prendas = () => {
          
     }, [])
 
+    //Pop up wishlist
+    // const [wishlistPopUp, setWishlistPopUp] = useState(false)
+    // const botonWishlistPopUp = () => setWishlistPopUp(!wishlistPopUp)
+
+    // const mostrarPopUp = () => {
+    //     setWishlistPopUp(true); 
+    //     setTimeout(()=>{
+    //         setWishlistPopUp(false);
+    //     }, 5000)
+    // }
+
 
     return (
-        <PrendasContext.Provider value={{logoHandler, wishlistHandler, prendas, agregarWishlist}}>
+        <PrendasContext.Provider value={{logoHandler, wishlistHandler, prendas, agregarWishlist, wishlistPopUp, botonWishlistPopUp}}>
             <Header/>
             <Articulos/>
         </PrendasContext.Provider>
@@ -117,6 +134,7 @@ const Articulos = () => {
     const {prendas, agregarWishlist} = useContext(PrendasContext)
     return(
         <main className='Main'>
+            
                 <div className='Prendas'>
                     <div className='Prendas-container'>
                         {prendas.map((eachPrenda) => (
@@ -135,16 +153,24 @@ const Articulos = () => {
 }
 
 const Prenda = (props) => {
-    const {src, alt, prendaName, prendaPriceActual, prendaPriceDisccount, prendaPriceLast, prendaPriceOld, agregarWishlist} = props
+    const {src, alt, prendaName, prendaPriceActual, prendaPriceDisccount, prendaPriceLast, prendaPriceOld, agregarWishlist, botonWishlistPopUp, wishlistPopUp} = props
     return(
    
-                        <div className='Prenda'>
+                            <div className='Prenda'>
+                            
                             <img src={src} alt={alt} className='Prenda-img'/>
                             <div className='Prenda-info'>
-                                <div className='Prenda-text'>
+                                <div className='Prenda-text'onClick={botonWishlistPopUp} >
                                     <p className='Prenda-name'>{prendaName}</p>
-                                    <img src="/icon-wishlist.svg" alt="Wishlist" className='Prenda-icon' onClick={()=> agregarWishlist(props)}/>
+                                    {agregarWishlist && (
+                                        <img src="/icon-wishlist.svg" alt="Wishlist" className='Prenda-icon'onClick={()=> agregarWishlist(props)}/>
+                                    )}
                                 </div>
+
+                                <div className={`PopUp-wishlist${wishlistPopUp ? "isVisible" : ""}`}>
+                                    <p>Se ha añadido la prenda a tu Wishlist</p>
+                                </div>
+                                
                                 <div className='Prenda-price'>
                                     <p className='Prenda-price-old'>{prendaPriceOld}</p>
                                     <p className='Prenda-price-last'>{prendaPriceLast}</p>

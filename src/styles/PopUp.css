@@ -1,0 +1,21 @@
+.PopUp-wishlist{
+    opacity: 0;
+    pointer-events: none;
+    position: fixed;
+    width: 25%;
+    top: 0;
+    right: 0;
+    background-color: red;
+    padding: 2%;
+    margin-right: 10%;
+    text-align: right;
+    transition: all 0.2s linear;
+    z-index: 1000;
+
+}
+
+.PopUp-wishlist.isVisible{
+    opacity: 1;
+    pointer-events: auto;
+
+}

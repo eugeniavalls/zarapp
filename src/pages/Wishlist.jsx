@@ -16,7 +16,7 @@ export const Wishlist = () => {
     const logoHandler = () => navigate('/gestor')
     const wishlistHandler = () => navigate('/wishlist')
 
-    //UseState para buscar los elementos del array de prendas
+    //UseState para almacenar la Wishlist
     const [wishlist, setWishlist] = useState([])
 
     useEffect(() => {
