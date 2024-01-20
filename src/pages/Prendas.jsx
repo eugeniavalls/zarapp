@@ -35,7 +35,8 @@ export const Prendas = () => {
             prendaPriceActual: producto.prendaPriceActual, 
             prendaPriceDisccount: producto.prendaPriceDisccount, 
             prendaPriceLast: producto.prendaPriceLast, 
-            prendaPriceOld: producto.prendaPriceOld
+            prendaPriceOld: producto.prendaPriceOld,
+            talla: producto.talla
         }
 
         console.log(nuevo)
@@ -153,7 +154,7 @@ const Articulos = () => {
 }
 
 const Prenda = (props) => {
-    const {src, alt, prendaName, prendaPriceActual, prendaPriceDisccount, prendaPriceLast, prendaPriceOld, agregarWishlist, botonWishlistPopUp, wishlistPopUp} = props
+    const {src, alt, prendaName, prendaPriceActual, prendaPriceDisccount, prendaPriceLast, prendaPriceOld, talla, agregarWishlist, botonWishlistPopUp, wishlistPopUp} = props
     return(
    
                             <div className='Prenda'>
