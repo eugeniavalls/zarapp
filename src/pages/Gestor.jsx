@@ -157,27 +157,6 @@ const Rebajas = () => {
 const Slider = () => {
     const {sliders, active, nextHandler, prevHandler} = useContext(HeaderContext)
 
-    // const handleWheel = (event) => {
-    //     const delta = Math.sign(event.deltaY) //Normaliza la velocidad del scroll
-    //     if(delta > 0){
-    //         //Scroll hacia abajo
-    //         nextHandler()
-    //     } else {
-    //         //Scroll hacia arriba
-    //         prevHandler()
-    //     }
-    // }
-
-    // useEffect(()=> {
-    //     //Agregar event listener para el evento wheel 
-    //     window.addEventListener("wheel", handleWheel)
-
-    //     //Limpiar el evenet listener al desmontar el componente
-    //     return () => {
-    //         window.removeEventListener("wheel", handleWheel)
-    //     }
-    // }, [nextHandler, prevHandler])
-
     return (
         <main className='Main'>
                 <div className='Slider'>
@@ -191,10 +170,9 @@ const Slider = () => {
                                     alt={eachSlider.alt}
                                     className='Slider-img'
                                     style={{
-                                        // width: '100%',
-                                        // opacity: index === active ? 1 : 0, 
+            
                                         display: index === active ? 'block' : 'none', //Mostrar solo la imagen activa
-                                        // transition: 'opacity 0.5 ease-in-out'
+                                       
                                     }}
                                 />
                             ))

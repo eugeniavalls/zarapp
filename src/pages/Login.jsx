@@ -48,7 +48,7 @@ export const Login = () => {
                 .then(data => {
                     // console.clear()
                     console.log(data)
-                    //Si los datos de inicio de sesión existen entonces navega al gestor
+                   //Si los datos de inicio de sesión existen entonces navega al gestor
                     if (data) {
                         localStorage.setItem('usuarios', JSON.stringify(data))
                         navigate('/gestor')
