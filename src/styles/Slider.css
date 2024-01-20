@@ -1,38 +1,33 @@
+/*----- Slider ----- *\
+/* Descripción: Estilos para el slider de la página de inicio (/gestor)
+ * Estructura: 
+ *     - Estilos generales del slider
+ *     - Contenedor del slider
+ *     - Imagen del slider
+ */
+
 .Slider {
+    position: fixed;
+    overflow: hidden;
     z-index: -20;
-    position: relative;
-    /* overflow: hidden; */
 }
 
 .Slider-container {
+    height: 100vh;
     width: 100%;
-    /* background-color: red; */
-    transition: all .5s ease;
-/* 
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); */
+    overflow: hidden; 
 }
 
 .Slider-img{
-    min-height: 8rem; 
+    width: 100%;
+    height: 100%;
+    transition: all 0.5s linear; 
+
+    /* Que la imagen se ajuste al tamaño del contenedor */
+    object-fit: cover; 
 }
 
-.Slider-next{
-    width: 4rem;
-    height: 4rem;
-    /* background-color: blue; */
-    position: absolute;
-    top: calc(50% - 2rem);
-    right: 0;
-}
- 
-.Slider-prev{
-    width: 4rem;
-    height: 4rem;
-    /* background-color: blue; */
-    position: absolute;
-    top: calc(50% - 2rem);
-    left: 0;
-}
+/* ------ Slider ----- */
+
 
 

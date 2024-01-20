@@ -1,3 +1,16 @@
+/*----- Formulario ----- *\
+/* Descripción: Estilos para el formulario
+ * Estructura: 
+ *     - Formulario
+ *     - h2 del formulario
+ *     - Contenedor del formulario
+ *     - Datos del formulario
+ *     - Lineas del formulario
+ *     - Información del formulario 
+ *     - Boton para acceder 
+ *     - Hover botón para acceder
+ */
+
 .Form {
     /* movil */
         display: flex;
@@ -52,17 +65,15 @@
         }
 }
 
-.Form-dates {
-    /* movil */
-        display: flex;
-        flex-direction: column;
-        gap: 3rem;
+.Form-dates {  
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
 }
 
 .Form-line {
-    /* movil */
-        height: 1.5rem;
-        border-bottom: 0.0625rem solid var(--primary-color);
+    height: 1.5rem;
+    border-bottom: 0.0625rem solid var(--primary-color);
 }
 
 .Form-info {
@@ -87,7 +98,7 @@
         padding: 1rem;
         font-size: 0.6875rem;
         background-color: var(--secundary-color);
-        border: 1px solid var(--primary-color);
+        border: 0.0625rem solid var(--primary-color);
         color: var(--primary-color);
         border-radius: 0;
         font-weight: var(--font-regular);
@@ -108,7 +119,7 @@
 }
 
 .Form-access:hover {
-    /* movil */
-        color: var(--hover-color);
-
+    color: var(--hover-color);
 }
+
+/* ------ Formulario ----- */

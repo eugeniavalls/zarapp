@@ -1,18 +1,16 @@
 import { useNavigate } from 'react-router-dom'
-import { createContext, useContext, useEffect, useRef, useState } from "react"
-import '/src/styles/Gestor.css'
+import { createContext, useContext, useEffect, useState } from "react"
 import '/src/styles/Slider.css'
 import '/src/styles/Header.css'
 import '/src/styles/Rebajas.css'
-import '/src/styles/Wishlist.css'
 
 const WishlistContext = createContext()
 
 export const Wishlist = () => {
     const { VITE_URL_API } = import.meta.env
-    
-    const navigate = useNavigate()
 
+    const navigate = useNavigate()
+    
     const logoHandler = () => navigate('/gestor')
     const wishlistHandler = () => navigate('/wishlist')
 
@@ -29,7 +27,7 @@ export const Wishlist = () => {
         await cargarWishlist()
 
         setPopUpVisibility((prevVisibility) => ({
-            ...prevVisibility, 
+            ...prevVisibility,
             [_id]: !prevVisibility[_id]
         }))
 
@@ -42,8 +40,8 @@ export const Wishlist = () => {
 
     //Funcion para encontrar la talla por _id
     const findTallaById = (_id) => {
-        const prenda = wishlist.find((item)=> item._id === _id)
-        return prenda ? prenda.talla: null
+        const prenda = wishlist.find((item) => item._id === _id)
+        return prenda ? prenda.talla : null
     }
     // const showPopUp = () => {
     //     console.log('Mostrar pop up')
@@ -56,65 +54,49 @@ export const Wishlist = () => {
         let controller = new AbortController()
 
         let options = {
-             method: 'get',
-             headers: {
-                 "Content-type": "application/json"
-             },
-             signal: controller.signal
-         }
+            method: 'get',
+            headers: {
+                "Content-type": "application/json"
+            },
+            signal: controller.signal
+        }
 
         await fetch(`${VITE_URL_API}wishlist`, options)
-             .then(res => res.json())
-             .then(data => {
-                 console.clear()
-                 console.log("Datos de la API", data)
-                 setWishlist(data)
-             })
-             .catch(error => console.log(error))
-             .finally(() => controller.abort())
+            .then(res => res.json())
+            .then(data => {
+                console.clear()
+                console.log("Datos de la API", data)
+                setWishlist(data)
+            })
+            .catch(error => console.log(error))
+            .finally(() => controller.abort())
 
     }
 
-    useEffect(()=>{
+    useEffect(() => {
+        // Si no se ha iniciado la sesión, redirige a login
+        if (!localStorage.getItem('usuarios')) {
+            navigate('/')
+        } else {
+            //Si los datos de inicio de sesión existen entonces navega a la wishlist
+            navigate('/wishlist')
+        }
         cargarWishlist() //Cargar la wishlist al renderizar el componente
     }, [])
 
-    // useEffect(() => {
-
-    //     let controller = new AbortController()
-
-    //     let options = {
-    //         method: 'get',
-    //         headers: {
-    //             "Content-type": "application/json"
-    //         },
-    //         signal: controller.signal
-    //     }
-
-    //     fetch(`${VITE_URL_API}wishlist`, options)
-    //         .then(res => res.json())
-    //         .then(data => {
-    //             console.clear()
-    //             console.log("Datos de la API", data)
-    //             setWishlist(data)
-    //         })
-    //         .catch(error => console.log(error))
-    //         .finally(() => controller.abort())
-        
-    // }, [])
 
     //  funcion para eliminar la prenda desde la Wishlist
-    
-    
+
+
     const eliminarPrendaWishlist = async (id) => {
         try {
             let controller = new AbortController()
 
             let options = {
-                method: 'delete', 
+                method: 'delete',
                 headers: {
                     "Content-type": "application/json"
-                }, 
+                },
                 signal: controller.signal
             }
 
@@ -127,7 +109,7 @@ export const Wishlist = () => {
     }
 
     const updateSelectedSize = (_id, size) => {
-        setSelectedSize((prevSizes)=>({
+        setSelectedSize((prevSizes) => ({
             ...prevSizes,
             [_id]: size
         }))
@@ -138,17 +120,17 @@ export const Wishlist = () => {
             let controller = new AbortController()
 
             let options = {
-                method: 'put', 
-                body: JSON.stringify({talla: selectedSize[_id]}),
+                method: 'put',
+                body: JSON.stringify({ talla: selectedSize[_id] }),
                 headers: {
                     "Content-type": "application/json"
-                }, 
+                },
                 signal: controller.signal
             }
 
             await fetch(`${VITE_URL_API}wishlist/${_id}`, options)
             // Despues de actualizar la talla, se actualiza la wishlist para reflejar los cambios
-            await cargarWishlist() 
+            await cargarWishlist()
             //Se cierra el pop up
             showPopUp(_id)
         } catch (error) {
@@ -156,12 +138,12 @@ export const Wishlist = () => {
         }
     }
 
-    
+
 
     return (
         <WishlistContext.Provider value={{ logoHandler, wishlistHandler, wishlist, eliminarPrendaWishlist, showPopUp, popUpVisibility, selectedSize, updateSelectedSize, handleUpdateTalle }}>
             <Header />
-            <Articulos eliminarPrendaWishlist={eliminarPrendaWishlist}/>
+            <Articulos eliminarPrendaWishlist={eliminarPrendaWishlist} />
 
         </WishlistContext.Provider>
     )
@@ -186,19 +168,19 @@ const Header = () => {
     )
 }
 
-const Articulos = ({eliminarPrendaWishlist}) => {
-    const { wishlist} = useContext(WishlistContext)
+const Articulos = ({ eliminarPrendaWishlist }) => {
+    const { wishlist } = useContext(WishlistContext)
     return (
         <main className='Main'>
             <div className='Prendas'>
                 <div className='Prendas-container'>
                     {wishlist.map((eachPrenda) => (
-                            <Prenda
-                                key={eachPrenda._id}
-                                {...eachPrenda}
-                                eliminarPrendaWishlist={eliminarPrendaWishlist}
-                            />
-                        ))}
+                        <Prenda
+                            key={eachPrenda._id}
+                            {...eachPrenda}
+                            eliminarPrendaWishlist={eliminarPrendaWishlist}
+                        />
+                    ))}
 
 
                 </div>
@@ -210,28 +192,28 @@ const Articulos = ({eliminarPrendaWishlist}) => {
 const Prenda = (props) => {
     const { _id, src, alt, prendaName, prendaPriceActual, prendaPriceDisccount, prendaPriceLast, prendaPriceOld, talla, eliminarPrendaWishlist } = props
 
-    const {popUpVisibility, showPopUp, selectedSize, updateSelectedSize, handleUpdateTalle} = useContext(WishlistContext)
+    const { popUpVisibility, showPopUp, selectedSize, updateSelectedSize, handleUpdateTalle } = useContext(WishlistContext)
     return (
 
         <div className='Prenda Prenda-wishlist'>
-            
-                <div className={`PopUp-wishlist-update ${popUpVisibility[_id] ? "isVisible" : ""}`}>
-                    <div className='PopUp-wishlist-update-title'>
-                        <p>Talla</p>
-                        <p onClick={()=> showPopUp(_id)}>X</p>
-                    </div>
-                    <div className='PopUp-wishlist-update-container'>
-                        <p className={`PopUp-wishlist-update-talla ${selectedSize[_id] === 'S' ? 'selected' : ''}`} onClick={()=> updateSelectedSize(_id, 'S')}>S</p>
-                        <p className={`PopUp-wishlist-update-talla ${selectedSize[_id] === 'M' ? 'selected' : ''}`} onClick={()=> updateSelectedSize(_id, 'M')}>M</p>
-                        <p className={`PopUp-wishlist-update-talla ${selectedSize[_id] === 'L' ? 'selected' : ''}`} onClick={()=> updateSelectedSize(_id, 'L')}>L</p>
-                    </div>
-                    <button className='PopUp-wishlist-update-button' onClick={()=> handleUpdateTalle(_id)}>Actualizar</button>
+
+            <div className={`PopUp-wishlist-update ${popUpVisibility[_id] ? "isVisible" : ""}`}>
+                <div className='PopUp-wishlist-update-title'>
+                    <p>Talla</p>
+                    <p onClick={() => showPopUp(_id)}>X</p>
                 </div>
-            
+                <div className='PopUp-wishlist-update-container'>
+                    <p className={`PopUp-wishlist-update-talla ${selectedSize[_id] === 'S' ? 'selected' : ''}`} onClick={() => updateSelectedSize(_id, 'S')}>S</p>
+                    <p className={`PopUp-wishlist-update-talla ${selectedSize[_id] === 'M' ? 'selected' : ''}`} onClick={() => updateSelectedSize(_id, 'M')}>M</p>
+                    <p className={`PopUp-wishlist-update-talla ${selectedSize[_id] === 'L' ? 'selected' : ''}`} onClick={() => updateSelectedSize(_id, 'L')}>L</p>
+                </div>
+                <button className='PopUp-wishlist-update-button' onClick={() => handleUpdateTalle(_id)}>Actualizar</button>
+            </div>
+
             <div className='Prenda-icons'>
-                <img src="/icon-update.svg" alt="Wishlist" className='Prenda-icon Prenda-icon-wishlist' onClick={()=> showPopUp(_id)} />
+                <img src="/icon-update.svg" alt="Wishlist" className='Prenda-icon Prenda-icon-wishlist' onClick={() => showPopUp(_id)} />
                 {/* Llamada a la funcion para eliminar la prenda desde la Wishlist  */}
-                <img src="/icon-delete.svg" alt="Wishlist" className='Prenda-icon Prenda-icon-wishlist' onClick={()=> eliminarPrendaWishlist(_id)} /> 
+                <img src="/icon-delete.svg" alt="Wishlist" className='Prenda-icon Prenda-icon-wishlist' onClick={() => eliminarPrendaWishlist(_id)} />
             </div>
             <img src={src} alt={alt} className='Prenda-img' />
             <div className='Prenda-info'>

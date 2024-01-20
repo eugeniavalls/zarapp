@@ -1,7 +1,9 @@
 import { useNavigate } from 'react-router-dom'
-import { useEffect, useRef } from "react"
+import { createContext, useContext, useEffect, useRef } from "react"
 import '/src/styles/Login.css'
 import '/src/styles/Header.css'
+
+const LoginContext = createContext()
 
 export const Login = () => {
 
@@ -18,7 +20,7 @@ export const Login = () => {
         }
     })
 
-    const formHandler =  (e) => {
+    const formHandler = (e) => {
         e.preventDefault()
 
         let nuevo = {
@@ -27,10 +29,10 @@ export const Login = () => {
         }
         console.log(nuevo)
 
-        if(nuevo.nombre && nuevo.pass){
+        if (nuevo.nombre && nuevo.pass) {
 
             let controller = new AbortController()
-    
+
             //Cambiando siempre a stringify
             let options = {
                 method: 'post',
@@ -40,8 +42,8 @@ export const Login = () => {
                 },
                 signal: controller.signal
             }
-    
-             fetch(VITE_URL_API, options)
+
+            fetch(VITE_URL_API, options)
                 .then(res => res.json())
                 .then(data => {
                     // console.clear()
@@ -50,7 +52,7 @@ export const Login = () => {
                     if (data) {
                         localStorage.setItem('usuarios', JSON.stringify(data))
                         navigate('/gestor')
-                    } 
+                    }
                 })
                 .catch(error => console.log(error))
                 .finally(() => controller.abort())
@@ -59,35 +61,30 @@ export const Login = () => {
     }
 
     return (
-        <>
-            <Header/>
-            {/* Cuando se acceda a este formulario se enviará la información a la API y la Api tendrá que comprobar la informacion en la base de datos */}
-            <form onSubmit={formHandler} className='Form' >
-                <h2 className='Form-h2'>ACCEDE A TU CUENTA</h2>
+        <LoginContext.Provider value={{ formHandler, nombre, pass }}>
+            <Header />
+            <Form/>
+        </LoginContext.Provider>
 
-                <div className='Form-container'>
-                    <div className='Form-dates'>
-                        <div className='Form-line'>
-                            <input type="text" name="nombre" ref={nombre} placeholder="USUARIO" className='Form-info'/>
-                        </div>
-                        <div className='Form-line'>
-                            <input type="password" name="pass" ref={pass} placeholder="CONTRASEÑA" className='Form-info'/>
-                        </div>
-                    </div>
-                    <input type="submit" value="INICIAR SESIÓN" className='Form-access'/>
-                </div>
-            </form>
-        </>
     )
 }
 
+/**
+ * Componente Header
+ * Descripción: Este componente carga el Header del inicio de sesión
+ * Estructura: 
+ *  - Header
+ *      - Sección donde introducimos el logo y el buscar (que este último no tendrá interacción)
+ */
 const Header = () => {
     return (
+
         <header className='Header'>
+
             <section className='Header-section'>
                 <h1 className='Header-h1'>
                     <a href="https://www.zara.com/es/" className='Header-logo'>
-                        <img src="/logo.svg" alt="Zara" className='Header-image'/>
+                        <img src="/logo.svg" alt="Zara" className='Header-image' />
                     </a>
                 </h1>
                 <nav className='Header-nav'>
@@ -95,5 +92,29 @@ const Header = () => {
                 </nav>
             </section>
         </header>
+    )
+}
+
+{/* Cuando se acceda a este formulario se enviará la información a la API y la Api tendrá que comprobar la informacion en la base de datos */}
+const Form = (props) => {
+    // const { nombre, pass } = props
+    const { formHandler, nombre, pass } = useContext(LoginContext)
+    return (
+
+        <form onSubmit={formHandler} className='Form' >
+            <h2 className='Form-h2'>ACCEDE A TU CUENTA</h2>
+
+            <div className='Form-container'>
+                <div className='Form-dates'>
+                    <div className='Form-line'>
+                        <input type="text" name="nombre" ref={nombre} placeholder="USUARIO" className='Form-info' />
+                    </div>
+                    <div className='Form-line'>
+                        <input type="password" name="pass" ref={pass} placeholder="CONTRASEÑA" className='Form-info' />
+                    </div>
+                </div>
+                <input type="submit" value="INICIAR SESIÓN" className='Form-access' />
+            </div>
+        </form>
     )
 }

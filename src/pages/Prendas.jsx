@@ -1,6 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import { createContext, useContext, useEffect, useRef, useState } from "react"
-import '/src/styles/Gestor.css'
+import { createContext, useContext, useEffect, useState } from "react"
 import '/src/styles/Slider.css'
 import '/src/styles/Header.css'
 import '/src/styles/Rebajas.css'
@@ -23,8 +22,14 @@ export const Prendas = () => {
     const [wishlist, setWishlist] = useState([])
 
     //Pop up wishlist
-    const [wishlistPopUp, setWishlistPopUp] = useState(false)
-    const botonWishlistPopUp = () => setWishlistPopUp(!wishlistPopUp)
+    // const [wishlistPopUp, setWishlistPopUp] = useState({})
+    // const botonWishlistPopUp = async () => {
+    //     await agregarWishlist(props)
+    //     setWishlistPopUp(!wishlistPopUp)
+    //     setTimeout(()=>{
+    //         setWishlistPopUp(false)
+    //     }, 2000)
+    // }
 
     const agregarWishlist = async (producto) => {
 
@@ -60,13 +65,38 @@ export const Prendas = () => {
                 console.clear()
                 console.log("Datos de la API", data)
                 setWishlist(data)
+
+                //Actualizamos el estado del pop up individual para la prenda actual
+                // setWishlistPopUp(prevState => ({
+                //     ...prevState,
+                //     [producto.id]: true
+                // })) 
+
+                // setTimeout(()=> {
+                //     Restablecemos el estado del popup individual despues de un tiempo
+                //     setWishlistPopUp(prevState => ({
+                //         ...prevState, 
+                //         [producto.id]: false
+                //     }))
+                // }, 2000)
             })
             .catch(error => console.log(error))
             .finally(() => controller.abort())
- 
+        
+        // setWishlistPopUp(!wishlistPopUp)
+        // setTimeout(()=>{
+        //     setWishlistPopUp(false)
+        // }, 2000)
     }
 
     useEffect(() => {
+        // Si no se ha iniciado la sesión, redirige a login
+        if (!localStorage.getItem('usuarios')) {
+            navigate('/')
+        } else{
+            //Si los datos de inicio de sesión existen entonces navega a rebajas
+            navigate('/rebajas')
+        }
 
         let controller = new AbortController()
 
@@ -92,20 +122,9 @@ export const Prendas = () => {
          
     }, [])
 
-    //Pop up wishlist
-    // const [wishlistPopUp, setWishlistPopUp] = useState(false)
-    // const botonWishlistPopUp = () => setWishlistPopUp(!wishlistPopUp)
-
-    // const mostrarPopUp = () => {
-    //     setWishlistPopUp(true); 
-    //     setTimeout(()=>{
-    //         setWishlistPopUp(false);
-    //     }, 5000)
-    // }
-
 
     return (
-        <PrendasContext.Provider value={{logoHandler, wishlistHandler, prendas, agregarWishlist, wishlistPopUp, botonWishlistPopUp}}>
+        <PrendasContext.Provider value={{logoHandler, wishlistHandler, prendas, agregarWishlist}}>
             <Header/>
             <Articulos/>
         </PrendasContext.Provider>
@@ -154,23 +173,33 @@ const Articulos = () => {
 }
 
 const Prenda = (props) => {
-    const {src, alt, prendaName, prendaPriceActual, prendaPriceDisccount, prendaPriceLast, prendaPriceOld, talla, agregarWishlist, botonWishlistPopUp, wishlistPopUp} = props
+    const {src, alt, prendaName, prendaPriceActual, prendaPriceDisccount, prendaPriceLast, prendaPriceOld, talla, agregarWishlist} = props
+
+    // const {wishlistPopUp} = useContext(PrendasContext)
+
+    // const handleClick = () => {
+    //     if(botonWishlistPopUp){
+    //         botonWishlistPopUp(props)
+    //     }
+    // }
+
     return(
    
                             <div className='Prenda'>
+                                
                             
                             <img src={src} alt={alt} className='Prenda-img'/>
                             <div className='Prenda-info'>
-                                <div className='Prenda-text'onClick={botonWishlistPopUp} >
+                                <div className='Prenda-text' >
                                     <p className='Prenda-name'>{prendaName}</p>
                                     {agregarWishlist && (
-                                        <img src="/icon-wishlist.svg" alt="Wishlist" className='Prenda-icon'onClick={()=> agregarWishlist(props)}/>
+                                        <img src="/icon-wishlist.svg" alt="Wishlist" className='Prenda-icon'onClick={()=>agregarWishlist(props)}/>
                                     )}
                                 </div>
 
-                                <div className={`PopUp-wishlist${wishlistPopUp ? "isVisible" : ""}`}>
+                                {/* <div className={`PopUp-wishlist${wishlistPopUp ? "isVisible" : ""}`}>
                                     <p>Se ha añadido la prenda a tu Wishlist</p>
-                                </div>
+                                </div> */}
                                 
                                 <div className='Prenda-price'>
                                     <p className='Prenda-price-old'>{prendaPriceOld}</p>

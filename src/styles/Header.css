@@ -1,3 +1,15 @@
+/*----- Header ----- *\
+/* Descripción: Estilos para el Header de login, del gestor y de la wishlist
+ * Estructura: 
+ *     - Header
+ *     - Sección del header
+ *     - Imagen del header
+ *     - Nav
+ *     - Nav de la wishlist
+ *     - Hover de la wishlist
+ *     - Header estilos para el apartado de gestor
+ */
+
 .Header {
     /* movil */
         display: block;
@@ -51,6 +63,7 @@
 
 .Header-nav {
     /* movil */
+        cursor: pointer;
         padding: 0.4375rem 0.4375rem 0.4375rem 25%;
         margin-top: 0.625rem;
         font-size: 0.625rem;
@@ -75,8 +88,7 @@
 }
 
 .Header-wishlist:hover{ 
-    /* movil */
-        color: var(--hover-color); 
+    color: var(--hover-color); 
 }
 
 .Header-gestor{
@@ -84,6 +96,4 @@
     z-index: 10;
 }
 
-/* .Header-wishlistgeneral{
-    margin-bottom: 15%;
-} */
+/* ------ Header ----- */

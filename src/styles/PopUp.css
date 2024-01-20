@@ -1,15 +1,29 @@
-.PopUp-wishlist{
+/*----- Pop Up ----- *\
+/* Descripción: Estilos para el pop-up de actualizar talla, el pop-up que está comentado es porque se intentó realizar un pop-up de aviso para que cuando añades una prenda a la wishlist, pero no se llegó a conseguir
+ * Estructura: 
+ *     - Pop up estilos generales
+ *     - Ocultar y mostrar pop up
+ *     - Titulo 
+ *     - Contenedor 
+ *     - Talla y X (texto)
+ *     - Selección de talla
+ *     - Botón de actualizar talla
+ *     - Hover del botón actualizar talla
+ */
+
+/* .PopUp-wishlist{
     opacity: 0;
     pointer-events: none;
     position: fixed;
-    width: 25%;
-    top: 0;
-    right: 0;
-    background-color: red;
+    width: 26%;
+    top: 10%;
+    right: 2%;
+    background-color: var(--terciary-color);
+    border: 1px solid var(--primary-color);
     padding: 2%;
     margin-right: 10%;
     text-align: right;
-    transition: all 0.2s linear;
+    transition: all 0.5s linear;
     z-index: 1000;
 
 }
@@ -18,28 +32,38 @@
     opacity: 1;
     pointer-events: auto;
 
-}
+} */
 
 .PopUp-wishlist-update{
-    opacity: 0;
-    pointer-events: none;
-    position: absolute;
-    width: 80%;
-    top: 30%;
-    margin-left: 10%;
-    background-color: var(--secundary-color);
-    border: 1px solid var(--primary-color);
-    padding: 5%;
-    text-align: center;
-    transition: all 0.2s linear;
-    z-index: 1001;
+    /* movil */ 
+        opacity: 0;
+        pointer-events: none;
+        position: absolute;
+        width: 80%;
+        top: 30%;
+        margin-left: 10%;
+        transition: all 0.2s linear;
+        z-index: 1001;
+        text-align: center;
+        border: 0.0625rem solid var(--primary-color);
+        padding: 5%;
+        background-color: var(--secundary-color);
 
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    align-items: center;
-    justify-content: center;
+        display: flex;
+        flex-direction: column;
+        gap: 1.8rem;
+        align-items: center;
+        justify-content: center;
 
+    /* tablet */
+        @media screen and (min-width: 640px) { 
+            gap: 1.5rem;
+        }
+
+    /* desktop */
+        @media screen and (min-width: 1440px) {
+            gap: 1.5rem;
+        }
 }
 
 .PopUp-wishlist-update.isVisible{
@@ -49,13 +73,25 @@
 }
 
 .PopUp-wishlist-update-title{
-    display: flex;
-    align-items: start;
-    width: 100%;
-    justify-content: space-between;
-    flex-direction: row;
-    padding: 0 7%;
-    cursor: pointer;
+    /* movil */
+        cursor: pointer;
+        display: flex;
+        align-items: start;
+        justify-content: space-between;
+        flex-direction: row;
+        width: 100%;
+        padding: 0 7%;
+        font-size: 0.75rem;
+
+    /* tablet */
+        @media screen and (min-width: 640px){
+            font-size: 0.875rem;
+        }
+
+    /* desktop */
+        @media screen and (min-width: 1440px){
+            font-size: 15px;
+        }
 }
 
 .PopUp-wishlist-update-container{
@@ -64,17 +100,33 @@
     justify-content: center;
     gap: 2rem;
     overflow: hidden;
+
     transition-duration: .3s;
 }
 
 .PopUp-wishlist-update-talla{
-    /* background-color: blue; */
-    padding: 12px;
-    width: 50px;
-    height: 50px;
-    cursor: pointer;
-    border: 1px solid var(--primary-color);
-    /* border-radius: 50%; */
+    /* movil */
+        padding: 0.5rem;
+        width: 2.5rem;
+        height: 2.5rem;
+        cursor: pointer;
+        border: 0.0625rem solid var(--primary-color);
+        font-size: 0.625rem;
+
+    /* tablet */
+        @media screen and (min-width: 640px){
+            font-size: 0.75rem;
+            width: 2.5rem;
+            height: 2.5rem;
+        }
+
+    /* desktop */
+        @media screen and (min-width: 1440px){
+            font-size: 0.8125rem;
+            padding: 0.75rem;
+            width: 3.125rem;
+            height: 3.125rem;
+        }
 }
 
 .PopUp-wishlist-update-talla.selected{
@@ -83,12 +135,26 @@
 }
 
 .PopUp-wishlist-update-button{
-    background-color: var(--hover-color);
-    padding: 3%;
-    cursor: pointer;
+    /* movil */
+        background-color: var(--hover-color);
+        padding: 3%;
+        cursor: pointer;
+        font-size: 0.75rem;
+
+    /* tablet */
+        @media screen and (min-width: 640px){
+            font-size: 0.875rem;
+        }
+
+    /* desktop */
+        @media screen and (min-width: 1440px){
+            font-size: 0.9375rem;
+        }
 }
 
 .PopUp-wishlist-update-button:hover{
     background-color: var(--primary-color);
     color: var(--secundary-color);
 }
+
+/* ------ Pop Up ----- */

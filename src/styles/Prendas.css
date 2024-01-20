@@ -1,14 +1,28 @@
+/*----- Prendas ----- *\
+/* Descripción: Estilos para el contenedor de prendas asi como el estilo de cada una y su contenido (precio, imagen, etc)
+ * Estructura: 
+ *     - Prendas estilos generales
+ *     - Contenedor de todas las orendas
+ *     - Prenda
+ *     - Prenda en la wishlist 
+ *     - Texto de la prenda
+ *     - Nombre de la prenda
+ *     - Icono de la prenda
+ *     - Icono de la prenda en la wishlist
+ *     - Iconos en general
+ *     - Precio
+ *     - Precio antiguo
+ *     - Precio último
+ *     - Precio actual
+ */
+
 .Prendas {
-    /* z-index: -20;
-    position: absolute; */
-    /* overflow: hidden; */
     padding: 0 10%;
 }
 
 .Prendas-container {
     /* movil */
         width: 100%;
-        /* background-color: red; */
         transition: all .5s ease;
 
         display: grid;
@@ -18,7 +32,6 @@
     /* tablet */
         @media screen and (min-width: 640px) { 
             grid-template-columns: repeat(2, 1fr);
-            
         }
 
     /* desktop */
@@ -46,128 +59,110 @@
 }
 
 .Prenda-wishlist{
-position: relative;
+    position: relative;
 }
 
 .Prenda-text{
-        display: flex;
-        flex-direction: row;
-        align-items: start;
-        justify-content: space-between;
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    justify-content: space-between;
 }
 
 .Prenda-name{
     /* movil */
-        font-size: 10px;
+        font-size: 0.625rem;
     
     /* tablet */
         @media screen and (min-width: 640px) { 
-            font-size: 12px;
+            font-size: 0.75rem;
         }
 
     /* desktop */
         @media screen and (min-width: 1440px) {
-            font-size: 13px;
+            font-size: 0.8125rem;
         }
 }
 
 .Prenda-icon{
     /* movil */
-        width: 16px;
+        width: 1rem;
     
     /* tablet */
         @media screen and (min-width: 640px) { 
-            width: 17px;
+            width: 1.0625rem;
         }
 
     /* desktop */
         @media screen and (min-width: 1440px) {
-            width: 18px;
+            width: 1.125rem;
         }
 }
 
 .Prenda-icon-wishlist{
     /* movil */
-        border: 1px solid var(--color-opacity);
+        border: 0.0625rem solid var(--color-opacity);
         background-color: var(--color-opacity);
-        padding: 3px;
+        padding: 0.1875rem;
         border-radius: 50%;
-        width: 18px;
-        height: 18px;
+        width: 1.125rem;
+        height: 1.125rem;
     
     /* tablet */
         @media screen and (min-width: 640px) { 
-            border: 1px solid var(--color-opacity);
-            background-color: var(--color-opacity);
-            padding: 3px;
-            border-radius: 50%;
-            width: 20px;
-            height: 20px;
+            width: 1.25rem;
+            height: 1.25rem;
         }
 
     /* desktop */
         @media screen and (min-width: 1440px) {
-            border: 1px solid var(--color-opacity);
-            background-color: var(--color-opacity);
-            padding: 3px;
-            border-radius: 50%;
-            width: 24px;
-            height: 24px;
+            width: 1.5rem;
+            height: 1.5rem;
         }
 }
 
 .Prenda-icons{
-    /* movil */
-        display: flex;
-        justify-content: end;
-        gap: 10px;
-        /* position: relative; */
-    
-    /* tablet */
-        @media screen and (min-width: 640px) { 
-            /* width: 17px; */
-        }
-
-    /* desktop */
-        @media screen and (min-width: 1440px) {
-            /* width: 18px; */
-        }
+    display: flex;
+    justify-content: end;
+    gap: 0.625rem;
 }
 
 .Prenda-price{
     /* movil */
         display: flex;
         flex-direction: row;
-        font-size: 9px;
+        font-size: 0.5625rem;
         align-items: center;
         justify-content: start;
         gap: 1rem;
     
     /* tablet */
         @media screen and (min-width: 640px) { 
-            font-size: 10px;
+            font-size: 0.625rem;
         }
 
     /* desktop */
         @media screen and (min-width: 1440px) {
-            font-size: 11px;
+            font-size: 0.6875rem;
         }
 }
 
 .Prenda-price-old{
-        color: var(--color-opacity);
-        text-decoration: line-through;
+    color: var(--color-opacity);
+    text-decoration: line-through;
 }
 
 .Prenda-price-last{
-        text-decoration: line-through;
+    text-decoration: line-through;
 }
 
 .Prenda-price-now{
     display: flex;
     flex-direction: row;
     gap: 0.5rem;
-    padding: 0 4px;
+    padding: 0 0.25rem;
     background-color: var(--terciary-color);
     font-weight: var(--font-medium);
 }
+
+/* ------ Prendas ----- */
