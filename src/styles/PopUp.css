@@ -95,13 +95,24 @@
 }
 
 .PopUp-wishlist-update-container{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 2rem;
-    overflow: hidden;
+    /* movil */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+        overflow: hidden;
 
-    transition-duration: .3s;
+        transition-duration: .3s;
+
+    /* tablet */
+    @media screen and (min-width: 640px) { 
+        gap: 1.5rem;
+    }
+
+/* desktop */
+    @media screen and (min-width: 1440px) {
+        gap: 1.5rem;
+    }
 }
 
 .PopUp-wishlist-update-talla{
